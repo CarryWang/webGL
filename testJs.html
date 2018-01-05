@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    const compose = function (...funcs) {
+        if (funcs.length === 0) {
+            return (a) => {
+                return a
+            }
+        }
+
+        if (funcs.length === 1) {
+            return funcs[0]
+        }
+
+        return funcs.reduce((a, b) => {
+            return (...args) => {
+                return a(b(...args));
+            }
+        })
+    }
+
+    const add = function (a) {
+        return a + a
+    }
+
+    const square = function (a) {
+        return a * a
+    }
+
+    compose(add, square);
+</script>
+</html>
